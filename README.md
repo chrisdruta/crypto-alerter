@@ -42,9 +42,18 @@ Percent threshold is optional
 `python3 crypto-alerter.py [percent threshold ?= 7]` or w/e
 
 ### Crontab example
-Calls the script every 30 minutes with the proper secret environment
+Calls the script every 6 hours with the proper secret environment
 
-`*/30 * * * * . ~/.env && python3 ~/code/crypto-alerter/crypto-alerter.py > /dev/null 2>&1`
+`* */6 * * * . ~/.env && python3 ~/code/crypto-alerter/crypto-alerter.py > /dev/null 2>&1`
 
 ### Setting desired crypto alerts
 Set strings containing coin names in the `COINS_TO_CHECK` list at the top of the script
+
+### Thanks
+API / Data Source
+
+<a href="https://www.coingecko.com" target="_blank">
+    <img alt="coin gecko" width="40%"
+        src="https://lh4.googleusercontent.com/yic4hy8nNo742wUkhkpoQAHNWKpIi5aI4wFuuhfacjK33ngqeiSJ7wkoyHjKHJldnf5KnPh6QirA9XGsvoyT"
+    />
+</a>
