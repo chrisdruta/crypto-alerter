@@ -1,22 +1,25 @@
 #!/usr/bin/env python3
 import os
 
-import requests
+import requests, smtplib
 from dataclasses import dataclass
-
-import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-CHANGE_PERCENT_THRESHOLD = 7
+CHANGE_PERCENT_THRESHOLD = 7  # lucky number magic
 COINS_TO_CHECK = ['ethereum']
+
 
 def main():
     for coin in COINS_TO_CHECK:
         p = Ping(coin)
         print(p)
+
         if p.price_change_percentage_24h > CHANGE_PERCENT_THRESHOLD:
             send_email('magic internet money update!!', str(p))
+        elif p.price_change_percentage_24h < -1 * CHANGE_PERCENT_THRESHOLD:
+            send_email('sell', str(p))
+
 
 @dataclass
 class Ping:
@@ -36,12 +39,13 @@ class Ping:
     high_24h: float
     low_24h: float
 
+
 def send_email(subject:str, body: str) -> None:
     login_address = os.getenv('GMAIL_USER')
     secret = os.getenv('GMAIL_PASS')
     to_address = os.getenv('ALERT_PHONE_NUMBER_EMAIL')
 
-    if any(map(lambda e: e == None, [login_address, secret, to_address])):
+    if any(map(lambda env: env == None, [login_address, secret, to_address])):
         print('missing required environment variables')
         exit(1)
 
@@ -49,15 +53,16 @@ def send_email(subject:str, body: str) -> None:
     server.starttls()
     server.login(login_address, secret)
 
-    msg = MIMEMultipart()
+    message = MIMEMultipart()
 
-    msg['From'] = login_address
-    msg['To'] = to_address
-    msg['Subject'] = subject
-    msg.attach(MIMEText(body, 'plain'))
+    message['From'] = login_address
+    message['To'] = to_address
+    message['Subject'] = subject
+    message.attach(MIMEText(body, 'plain'))
 
-    server.sendmail(login_address, to_address, msg.as_string())
+    server.sendmail(login_address, to_address, message.as_string())
     server.quit()
+
 
 if __name__ == '__main__':
     main()
