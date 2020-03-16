@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-import os
+import os, sys
 
 import requests, smtplib
 from dataclasses import dataclass
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-CHANGE_PERCENT_THRESHOLD = 7  # lucky number magic
+CHANGE_PERCENT_THRESHOLD = float(sys.argv[1]) if len(sys.argv) > 1 else 7  # lucky number magic
 COINS_TO_CHECK = ['ethereum']
 
 
