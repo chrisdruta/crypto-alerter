@@ -54,6 +54,6 @@ API / Data Source
 
 <a href="https://www.coingecko.com" target="_blank">
     <img alt="coin gecko" width="40%"
-        src="https://lh4.googleusercontent.com/yic4hy8nNo742wUkhkpoQAHNWKpIi5aI4wFuuhfacjK33ngqeiSJ7wkoyHjKHJldnf5KnPh6QirA9XGsvoyT"
+        src="https://static.coingecko.com/s/coingecko-branding-guide-4f5245361f7a47478fa54c2c57808a9e05d31ac7ca498ab189a3827d6000e22b.png"
     />
 </a>
