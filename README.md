@@ -44,12 +44,12 @@ Percent threshold is optional
 ### Crontab example
 Calls the script every 6 hours with the proper secret environment
 
-`* */6 * * * . ~/.env && python3 ~/code/crypto-alerter/crypto-alerter.py > /dev/null 2>&1`
+`0 */6 * * * . ~/.env && python3 ~/code/crypto-alerter/crypto-alerter.py > /dev/null 2>&1`
 
 ### Setting desired crypto alerts
 Set strings containing coin names in the `COINS_TO_CHECK` list at the top of the script
 
-### Thanks
+## Thanks
 API / Data Source
 
 <a href="https://www.coingecko.com" target="_blank">
